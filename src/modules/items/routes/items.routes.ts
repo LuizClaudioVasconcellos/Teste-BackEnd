@@ -43,7 +43,7 @@ itemsRouter.put(
   isAuthenticated,
   celebrate({
     [Segments.BODY]: {
-      name: Joi.string().required(),
+      dish_name: Joi.string().required(),
       price: Joi.number().precision(2).required(),
       restaurant_id: Joi.number().integer().required(),
     },

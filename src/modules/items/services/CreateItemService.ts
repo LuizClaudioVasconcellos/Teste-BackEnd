@@ -19,7 +19,7 @@ class CreateItemService {
     const itemExists = await itemsRepository.findByName(dish_name);
 
     if (itemExists) {
-      throw new AppError('There is already one item whith this name');
+      throw new AppError('There is already one dish whith this name');
     }
 
     const item = itemsRepository.create({
