@@ -24,7 +24,7 @@ class Items {
   food_image: string;
 
   @OneToOne(type => Restaurant, item => Items)
-  @JoinColumn()
+  @JoinColumn({ name: 'restaurant_id' })
   restaurant: Restaurant;
 
   @Column()
