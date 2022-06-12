@@ -4,7 +4,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -23,7 +23,10 @@ class Items {
   @Column()
   food_image: string;
 
-  @OneToOne(type => Restaurant, item => Items)
+  @ManyToOne(() => Restaurant, restaurant => restaurant.items, {
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'restaurant_id' })
   restaurant: Restaurant;
 

@@ -8,10 +8,17 @@ export default class RestaurantsController {
     const cuisineType = request.query.cuisineType
       ? (request.query.cuisineType as string)
       : '';
+    const dish_name = request.query.dish_name
+      ? (request.query.dish_name as string)
+      : '';
 
     const listRestaurant = new ListRestaurantService();
 
-    const restaurants = await listRestaurant.execute(city, cuisineType);
+    const restaurants = await listRestaurant.execute(
+      city,
+      cuisineType,
+      dish_name,
+    );
 
     return response.json(restaurants);
   }

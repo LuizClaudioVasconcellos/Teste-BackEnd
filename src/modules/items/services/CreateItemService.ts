@@ -16,11 +16,11 @@ class CreateItemService {
     restaurant_id,
   }: IRequest): Promise<Item> {
     const itemsRepository = getCustomRepository(ItemRepository);
-    const itemExists = await itemsRepository.findByName(dish_name);
+    // const itemExists = await itemsRepository.findByName(dish_name);
 
-    if (itemExists) {
-      throw new AppError('There is already one dish whith this name');
-    }
+    // if (itemExists) {
+    //   throw new AppError('There is already one dish whith this name');
+    // }
 
     const item = itemsRepository.create({
       dish_name,

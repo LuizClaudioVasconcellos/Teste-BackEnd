@@ -3,7 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -37,8 +37,8 @@ class Restaurant {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @OneToOne(type => Items, restaurant => Restaurant)
-  item: Items;
+  @OneToMany(type => Items, items => items.restaurant)
+  items: Items;
 }
 
 export default Restaurant;

@@ -11,12 +11,7 @@ interface IRequest {
 }
 
 class UpdateItemService {
-  public async execute({
-    id,
-    dish_name,
-    price,
-    restaurant_id,
-  }: IRequest): Promise<Item> {
+  public async execute({ id, dish_name, price }: IRequest): Promise<Item> {
     const itemsRepository = getCustomRepository(ItemRepository);
 
     const item = await itemsRepository.findOne(id);
@@ -33,7 +28,6 @@ class UpdateItemService {
 
     item.dish_name = dish_name;
     item.price = price;
-    item.restaurant_id = restaurant_id;
 
     await itemsRepository.save(item);
 

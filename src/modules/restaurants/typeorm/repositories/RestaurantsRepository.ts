@@ -1,4 +1,4 @@
-import { EntityRepository, Like, Repository } from 'typeorm';
+import { EntityRepository, ILike, Like, Repository } from 'typeorm';
 import Restaurant from '../entities/Restaurant';
 
 @EntityRepository(Restaurant)
@@ -36,14 +36,16 @@ export class RestaurantsRepository extends Repository<Restaurant> {
   public async findAll(
     city: string,
     cuisineType: string,
+    dish_name: string,
   ): Promise<Restaurant[]> {
-    const restaurant = await this.find({
-      select: ['restaurantName', 'contactNumber', 'city', 'cuisineType'],
-      where: {
-        city: Like(`%${city}%`),
-        cuisineType: Like(`%${cuisineType}%`),
-      },
-    });
+    const restaurant = await this.createQueryBuilder('restaurants')
+      .where({ city: ILike(`%${city}%`) })
+      .andWhere({ cuisineType: ILike(`%${cuisineType}%`) })
+      .leftJoinAndSelect('restaurants.items', 'items')
+      .andWhere('items.dish_name ILIKE :dish_name', {
+        dish_name: `%${dish_name}%`,
+      })
+      .getMany();
 
     return restaurant;
   }
