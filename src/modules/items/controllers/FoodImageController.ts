@@ -6,7 +6,7 @@ export default class FoodImageController {
     const updateImage = new UpdateFoodImageService();
 
     const item = updateImage.execute({
-      itemId: request.itemId.id,
+      itemId: +request.params.itemId,
       avatarFileName: request.file?.filename as string,
     });
 

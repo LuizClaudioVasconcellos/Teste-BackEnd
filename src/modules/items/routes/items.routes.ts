@@ -64,7 +64,7 @@ itemsRouter.delete(
 );
 
 itemsRouter.patch(
-  '/food',
+  '/food/:itemId',
   isAuthenticated,
   upload.single('food'),
   foodImageController.update,
