@@ -33,6 +33,15 @@ Yarn:
 ```
 yarn install
 ```
+Criando banco de dados:
+> Após instalar o projeto, crie um banco de dados com o nome desafioevnts utilizando o DBeaver. Mais informações no arquivo ormconfig.json
+
+Migrations:
+> Rode as migrations uma por uma para. Rode na ordem: CreateRestaurant, CreateRestaurantToken e CreateItems. Para fazer isso tire as outras migrations de dentro da pasta e rode, repita isso até ter rodados todas as migrations. Deve ser feito assim ou então ocorrerá um erro de relação.
+```
+npm run typeorm migration:run
+yarn typeorm migration:run
+```
 
 ## ☕ Usando
 
