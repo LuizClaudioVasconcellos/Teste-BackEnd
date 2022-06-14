@@ -1,3 +1,4 @@
+import AppError from '@shared/errors/AppError';
 import { Request, Response } from 'express';
 import CreateItemService from '../services/CreateItemService';
 import DeleteItemService from '../services/DeleteItemService';
@@ -25,7 +26,8 @@ export default class ItemsController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { dish_name, price, restaurant_id } = request.body;
+    const { dish_name, price } = request.body;
+    const restaurant_id = request.restaurantId.id;
 
     const createItem = new CreateItemService();
 
@@ -39,8 +41,17 @@ export default class ItemsController {
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const { dish_name, price, restaurant_id } = request.body;
+    const { dish_name, price } = request.body;
     const { id } = request.params;
+    const restaurant_id = request.restaurantId.id;
+
+    const showItem = new ShowItemService();
+
+    const items = await showItem.execute({ id });
+
+    if (items.restaurant_id !== restaurant_id) {
+      throw new AppError('You are not allowed to change this item');
+    }
 
     const updateItem = new UpdateItemService();
 

@@ -20,12 +20,6 @@ class UpdateItemService {
       throw new AppError('Item not found');
     }
 
-    const itemExists = await itemsRepository.findByName(dish_name);
-
-    if (itemExists && dish_name !== item.dish_name) {
-      throw new AppError('There is already one item whith this name');
-    }
-
     item.dish_name = dish_name;
     item.price = price;
 

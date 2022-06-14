@@ -32,7 +32,6 @@ itemsRouter.post(
     [Segments.BODY]: {
       dish_name: Joi.string().required(),
       price: Joi.number().precision(2).required(),
-      restaurant_id: Joi.number().integer().required(),
     },
   }),
   itemsController.create,
